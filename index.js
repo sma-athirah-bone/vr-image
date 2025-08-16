@@ -25,6 +25,7 @@
   var panoElement = document.querySelector('#pano');
   var sceneNameElement = document.querySelector('#titleBar .sceneName');
   var sceneListElement = document.querySelector('#sceneList');
+  var sceneDetailVr = document.querySelector('#detailVr');
   var sceneElements = document.querySelectorAll('#sceneList .scene');
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
@@ -143,6 +144,11 @@
   // Start with the scene list open on desktop.
   if (!document.body.classList.contains('mobile')) {
     showSceneList();
+    deleteLeftPositionDetailVr();
+  } else {
+    // On mobile, start with scene list hidden
+    hideSceneList();
+    showLeftPositionDetailVr();
   }
 
   // Set handler for scene switch.
@@ -153,6 +159,7 @@
       // On mobile, hide scene list after selecting a scene.
       if (document.body.classList.contains('mobile')) {
         hideSceneList();
+        showLeftPositionDetailVr();
       }
     });
   });
@@ -209,16 +216,29 @@
   function showSceneList() {
     sceneListElement.classList.add('enabled');
     sceneListToggleElement.classList.add('enabled');
+    showLeftPositionDetailVr();
   }
-
+  
+  function deleteLeftPositionDetailVr(){
+    sceneDetailVr.classList.add('enabled');
+  }
+  
+  function showLeftPositionDetailVr(){
+    sceneDetailVr.classList.remove('enabled');
+  }
+  
   function hideSceneList() {
     sceneListElement.classList.remove('enabled');
     sceneListToggleElement.classList.remove('enabled');
+    deleteLeftPositionDetailVr()
   }
 
   function toggleSceneList() {
-    sceneListElement.classList.toggle('enabled');
-    sceneListToggleElement.classList.toggle('enabled');
+    if (sceneListElement.classList.contains('enabled')) {
+      hideSceneList();
+    } else {
+      showSceneList();
+    }
   }
 
   function startAutorotate() {
