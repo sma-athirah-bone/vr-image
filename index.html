@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="multiple-scenes ">
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-gerbang">
+        <li class="text">Gerbang</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-jalan-masuk-utama">
+        <li class="text">Jalan Masuk Utama</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-bundaran">
+        <li class="text">Bundaran</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-depan-koridor">
+        <li class="text">Depan Koridor</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-koridor-asrama">
+        <li class="text">Koridor Asrama</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-depan-aspuri">
+        <li class="text">Depan Aspuri</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-depan-koperasi">
+        <li class="text">Depan Koperasi</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-guest-house">
+        <li class="text">Guest House</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-parkiran">
+        <li class="text">Parkiran</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-depan-masjid">
+        <li class="text">Depan Masjid</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-gedung-sma">
+        <li class="text">Gedung SMA</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-lapangan-voli">
+        <li class="text">Lapangan Voli</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-lab-komputer">
+        <li class="text">Lab Komputer</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-lab-kimia">
+        <li class="text">Lab Kimia</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="14-lab-fisika">
+        <li class="text">Lab Fisika</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="15-ruang-kelas">
+        <li class="text">Ruang Kelas</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="16-taman">
+        <li class="text">Taman</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="17-belakang-masjid">
+        <li class="text">Belakang Masjid</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="18-lapangan-futsal">
+        <li class="text">Lapangan Futsal</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="19-gedung-smp">
+        <li class="text">Gedung SMP</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="20-masjid">
+        <li class="text">Masjid</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="21-ruang-makan">
+        <li class="text">Ruang makan</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="22-kamar-aspuri">
+        <li class="text">Kamar Aspuri</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="23-perpustakaan">
+        <li class="text">Perpustakaan</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="24-depan-perpustakaan">
+        <li class="text">Depan Perpustakaan</li>
+      </a>
+    
+  </ul>
+</div>
+
+<div id="titleBar">
+  <h1 class="sceneName"></h1>
+  <p class="credit">&copy; 2025 SMA Athirah Bone</p>
+</div>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<!-- <a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a> -->
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <div class="icon-wrapper">
+    <img class="icon off" src="img/expand.png">
+    <img class="icon on" src="img/collapse.png">
+  </div>
+  <p class="text">
+    Titik Lokasi
+  </p>
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
