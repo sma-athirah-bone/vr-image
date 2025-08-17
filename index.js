@@ -31,6 +31,9 @@
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
 
+
+  showSceneList()
+
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
     var setMode = function() {
@@ -235,7 +238,7 @@
 
   function toggleSceneList() {
     if (sceneListElement.classList.contains('enabled')) {
-      hideSceneList();
+      // hideSceneList();
     } else {
       showSceneList();
     }
