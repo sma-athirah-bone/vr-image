@@ -15,7 +15,48 @@
 
 <div id="pano"></div>
 
-<div id="sceneList" class="enabled">
+<div id="sceneDropdownContainer">
+  <div id="sceneDropdown">
+    <div id="sceneDropdownToggle">
+      <span class="text">Pilih Lokasi - Gerbang</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <div id="sceneList">
+      <ul class="scenes">
+        <li><a href="javascript:void(0)" class="scene current" data-id="0-gerbang"><span class="text">Gerbang</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="1-jalan-masuk-utama"><span class="text">Jalan Masuk Utama</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="2-bundaran"><span class="text">Bundaran</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="3-depan-koridor"><span class="text">Depan Koridor</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="4-koridor-asrama"><span class="text">Koridor Asrama</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="5-depan-aspuri"><span class="text">Depan Aspuri</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="6-depan-koperasi"><span class="text">Depan Koperasi</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="7-guest-house"><span class="text">Guest House</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="8-parkiran"><span class="text">Parkiran</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="9-depan-masjid"><span class="text">Depan Masjid</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="10-gedung-sma"><span class="text">Gedung SMA</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="11-lapangan-voli"><span class="text">Lapangan Voli</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="12-lab-komputer"><span class="text">Lab Komputer</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="13-lab-kimia"><span class="text">Lab Kimia</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="14-lab-fisika"><span class="text">Lab Fisika</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="15-ruang-kelas"><span class="text">Ruang Kelas</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="16-taman"><span class="text">Taman</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="17-belakang-masjid"><span class="text">Belakang Masjid</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="18-lapangan-futsal"><span class="text">Lapangan Futsal</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="19-gedung-smp"><span class="text">Gedung SMP</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="20-masjid"><span class="text">Masjid</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="21-ruang-makan"><span class="text">Ruang makan</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="22-kamar-aspuri"><span class="text">Kamar Aspuri</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="23-perpustakaan"><span class="text">Perpustakaan</span></a></li>
+        <li><a href="javascript:void(0)" class="scene" data-id="24-depan-perpustakaan"><span class="text">Depan Perpustakaan</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="sceneList" class="enabled">
   <ul class="scenes">
     
       <a href="javascript:void(0)" class="scene" data-id="0-gerbang">
@@ -119,17 +160,18 @@
       </a>
     
   </ul>
-</div>
-<a href="javascript:void(0)" id="sceneListToggle">
-  <!-- <div class="icon-wrapper">
+</div> -->
+
+<!-- <a href="" id="sceneListToggle">
+  <div class="icon-wrapper">
     <img class="icon off" src="img/expand.png">
     <img class="icon on" src="img/collapse.png">
-  </div> -->
-  <img src="img/info.png" class="icon">
+  </div>
+  <img src="img/menu.svg" class="icon">
   <p class="text">
     Titik Lokasi
   </p>
-</a>
+</a> -->
 
 <div id="detailVr">
   
@@ -138,10 +180,12 @@
       <img class="icon off" src="img/play.png">
       <img class="icon on" src="img/pause.png">
     </a>
-    <h1 class="sceneName"></h1>
+    <div>
+      <h1 class="sceneName"></h1>
+      <span class="credit">&copy; 2025 SMA Athirah Bone</span>
+    </div>
   </div>
   
-  <span class="credit">&copy; 2025 SMA Athirah Bone</span>
 </div>
 
 
