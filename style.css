@@ -18,7 +18,7 @@
 
 html, body {
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -36,7 +36,7 @@ a, a:hover, a:active, a:visited {
 #pano {
   position: absolute;
   top: 0;
-  left: 240px ;
+  left: 0 ;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -44,48 +44,21 @@ a, a:hover, a:active, a:visited {
 
 #detailVr {
   position: absolute;
-  bottom: 40px;
-  left: 270px;
-  /* width: -webkit-fill-available; */
-  /* opacity: 0.9; */
-  /* padding: 20px 0; */
-  /* gap: 16px; */
-  /* background-color: #363636; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column; */
-  /* -webkit-transition: left 0.5s ease-in-out;
-  transition: left 0.5s ease-in-out; */
-  z-index: 1;
+  bottom: 20px;
+  left: 20px;
+  width: 340px;
 }
-
-/* .mobile #detailVr{
-  left: 270px;
-} */
-
-/* #detailVr.enabled{
-  left: 240px;
-  height: 116px;
-  -webkit-transition: margin-left 0.5s ease-in-out;
-  transition: margin-left 0.5s ease-in-out;
-} */
 
 #titleBar {
   display: flex;
   gap: 10px;
   background: #363636;
-  padding: 10px 16px;
-  border-radius: 8px;
-  justify-content: center;
+  opacity: 0.86;
+  padding: 14px 16px;
+  border-radius: 10px;
+  justify-content: left;
 }
 
-.mobile #titleBar {
-  height: 50px;
-  right: 50px;
-}
-
-/* If there is a fullscreen button the title bar must make space for it */
 body.fullscreen-enabled #titleBar {
   right: 80px;
 }
@@ -97,7 +70,6 @@ body.fullscreen-enabled.mobile #titleBar {
 
 #titleBar .sceneName {
   width: 100%;
-  line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -105,7 +77,7 @@ body.fullscreen-enabled.mobile #titleBar {
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bolder;
   color: #F8F8F8;
 }
@@ -115,11 +87,6 @@ body.fullscreen-enabled.mobile #titleBar {
   margin-top: 6px;
   color: #F8F8F8;;
   display: block;
-}
-
-.mobile #titleBar .sceneName {
-  line-height: 40px;
-  font-size: 20px;
 }
 
 .mobile #titleBar .credit {
@@ -140,7 +107,6 @@ body.fullscreen-enabled.mobile #titleBar {
   margin-right: 6px;
 }
 
-/* If there is a fullscreen button, autorotate must placed a bit to the left */
 body.fullscreen-enabled #autorotateToggle {
   right: 40px;
 }
@@ -170,99 +136,10 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
-#sceneListToggle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 10px;
-  height: 60px;
-  width: 240px;
-  padding: 20px;
-  background-color: #F8F8F8;
-  opacity: 0.9;
-  font-weight: 600;
-  border-bottom: #5a5a5a solid 1px;
-}
-
-.mobile #sceneListToggle {
-  width: 220px;
-  height: 20px;
-}
-
-#sceneListToggle .text {
-  width: 100%;
-  line-height: 30px;
-}
-
-#sceneListToggle .icon {
-  width: 20px;
-  height: 20px;
-}
-
-.mobile #sceneListToggle .icon {
-  top: 10px;
-  right: 10px;
-}
-
-#sceneListToggle .icon.on {
-  display: none;
-}
-
-#sceneListToggle .icon.off {
-  display: block;
-}
-
-#sceneListToggle.enabled .icon.on {
-  display: block;
-}
-
-#sceneListToggle.enabled .icon.off {
-  display: none;
-}
-
-#sceneList {
-  z-index: 2;
-  position: absolute;
-  left: -220px;
-  width: 240px;
-  height: -webkit-fill-available;
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin-left: 0;
-  top: 70px;
-  /* -webkit-transition: margin-left 0.5s ease-in-out;
-  transition: margin-left 0.5s ease-in-out; */
-  background-color: #F8F8F8;
-  opacity: 0.9;
-  padding:  0 20px 20px 10px;
-}
-
 #sceneList .scenes {
   display: grid;
   grid-template-columns: 1;
   gap: 8px;
-}
-
-.mobile #sceneList {
-  top: 40px;
-}
-
-.mobile #sceneList {
-  width: 220px;
-  left: -100%;
-}
-
-.mobile #sceneList.enabled {
-  margin-left: 100%;
-}
-
-.mobile #sceneList .scenes {
-  height: 100%;
 }
 
 #sceneList.enabled {
@@ -274,20 +151,12 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   border-radius: 8px;
 }
 
-.mobile #sceneList .scene {
-  height: 40px;
-}
-
 #sceneList .scene .text {
   padding: 4px 15px;
   line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.mobile #sceneList .scene .text {
-  line-height: 40px;
 }
 
 .no-touch #sceneList .scene:hover {
@@ -303,7 +172,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 /* Hide scene list when only a single scene exists */
 body.single-scene #sceneList, body.single-scene #sceneListToggle {
   display: none;
-}
+} */
 
 /* Link hotspot */
 
@@ -327,22 +196,20 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 }
 
 .link-hotspot-icon {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
+  width: 50px;
 }
 
 .link-hotspot-tooltip {
   position: absolute;
   left: 100%;
-  top: 14px; /* ( 60 - (16 + 2*8) ) / 2 */
-  margin-left: 3px;
-  font-size: 16px;
+  top: 12px;
+  margin-left: 10px;
+  font-size: 14px;
   max-width: 300px;
   padding: 8px 12px;
   border-radius: 8px;
-  background-color: #363636;
-  color: #fff;
+  background-color: #F8F8F8;
+  color: #363636;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -411,7 +278,8 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background-color:#037C3A;
+  background-color:#F8F8F8;
+  background-color: #363636;
   cursor: pointer;
   -webkit-transition: width 0.3s ease-in-out 0.5s,
                       border-radius 0.3s ease-in-out 0.5s;
@@ -450,6 +318,9 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .info-hotspot .info-hotspot-icon-wrapper {
   width: 40px;
   height: 40px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobile .info-hotspot .info-hotspot-icon-wrapper {
@@ -458,9 +329,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 }
 
 .info-hotspot .info-hotspot-icon {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
+  width: 60%;
 }
 
 .info-hotspot .info-hotspot-title-wrapper {
@@ -497,13 +366,13 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .info-hotspot .info-hotspot-title {
   display: inline-block;
   vertical-align: middle;
-
+  color: #F8F8F8;
   -moz-user-select: text;
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text;
 }
-
+/* 
 .info-hotspot .info-hotspot-close-wrapper {
   position: absolute;
   left: 260px;
@@ -548,7 +417,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   width: 70%;
   height: 70%;
   margin: 15%;
-}
+} */
 
 .info-hotspot .info-hotspot-text {
   position: absolute;
@@ -600,13 +469,12 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
               visibility 0s 0s;
 }
 
-/* Info hotspot modal */
 
 .desktop .info-hotspot-modal {
   display: none;
 }
 
-.info-hotspot-modal {
+/* .info-hotspot-modal {
   top: 0;
   left: 0;
   position: absolute;
@@ -706,9 +574,9 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   width: 70%;
   height: 70%;
   margin: 15%;
-}
+} */
 
-.info-hotspot-modal .info-hotspot-text {
+/* .info-hotspot-modal .info-hotspot-text {
   position: absolute;
   top: 110px;
   bottom: 10px;
@@ -732,57 +600,163 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   opacity: 1;
   -webkit-transition: opacity 0.3s ease-in-out 0.4s;
   transition: opacity 0.3s ease-in-out 0.4s;
-}
+} */
 
-/* View control buttons */
 
-.viewControlButton {
-  display: none;
+
+#sceneDropdownContainer {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  width: 340px;
 }
 
-body.view-control-buttons .viewControlButton {
+#sceneDropdown {
+  position: relative;
+}
+
+/* Dropdown toggle button */
+#sceneDropdownToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(248, 248, 248, 0.95);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+#sceneDropdownToggle:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+#sceneDropdownToggle .text {
+  flex: 1;
+  line-height: 1.2;
+  font-size: 14px;
+}
+
+#sceneDropdownToggle .icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+#sceneDropdownToggle.open .icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown list */
+#sceneList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(248, 248, 248, 0.95);
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 8px;
+  max-height: 300px;
+  width: 340px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  padding: 10px;
+}
+
+#sceneList.show {
+  margin-top: 8px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#sceneList .scenes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sceneList .scene {
   display: block;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(54, 54, 54, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
 }
 
-/* Hide controls when width is too small */
-@media (max-width: 600px) {
-  body.view-control-buttons .viewControlButton {
-    display: none;
+#sceneList .scene:last-child {
+  border-bottom: none;
+}
+
+#sceneList .scene:hover {
+  background-color: #363636;
+  color: #F8F8F8;
+}
+
+#sceneList .scene.current {
+  background-color: #363636;
+  color: #F8F8F8;
+  font-weight: 600;
+}
+
+#sceneList .scene .text {
+  line-height: 1.2;
+}
+
+/* Custom scrollbar */
+#sceneList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#sceneList::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+#sceneList::-webkit-scrollbar-thumb {
+  background: rgba(54, 54, 54, 0.5);
+  border-radius: 3px;
+}
+
+#sceneList::-webkit-scrollbar-thumb:hover {
+  background: rgba(54, 54, 54, 0.7);
+}
+
+@media (max-width: 767px) {
+  #sceneDropdownContainer {
+    width: calc(100vw - 40px);
   }
-}
-
-.viewControlButton .icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 30px;
-  height: 30px;
-}
-
-/* Center is at margin-left: -20px */
-.viewControlButton-1 {
-  margin-left: -145px;
-}
-.viewControlButton-2 {
-  margin-left: -95px;
-}
-.viewControlButton-3 {
-  margin-left: -45px;
-}
-.viewControlButton-4 {
-  margin-left: 5px;
-}
-.viewControlButton-5 {
-  margin-left: 55px;
-}
-.viewControlButton-6 {
-  margin-left: 105px;
+  
+  #sceneDropdownToggle {
+    padding: 10px 14px;
+  }
+  
+  #sceneDropdownToggle .text {
+    font-size: 13px;
+  }
+  
+  #sceneList {
+    max-height: 250px;
+    width: auto;
+  }
+  
+  #sceneList .scene {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
 }

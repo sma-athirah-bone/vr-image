@@ -24,15 +24,14 @@
   // Grab elements from DOM.
   var panoElement = document.querySelector('#pano');
   var sceneNameElement = document.querySelector('#titleBar .sceneName');
-  var sceneListElement = document.querySelector('#sceneList');
   var sceneDetailVr = document.querySelector('#detailVr');
-  var sceneElements = document.querySelectorAll('#sceneList .scene');
-  var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
 
-
-  showSceneList()
+  // NEW: Dropdown elements
+  var dropdownToggle = document.querySelector('#sceneDropdownToggle');
+  var dropdownSceneList = document.querySelector('#sceneList');
+  var dropdownSceneElements = document.querySelectorAll('#sceneList .scene');
 
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
@@ -125,7 +124,7 @@
   autorotateToggleElement.addEventListener('click', toggleAutorotate);
 
   // Set up fullscreen mode, if supported.
-  if (screenfull.enabled && data.settings.fullscreenButton) {
+  if (screenfull && screenfull.enabled && data.settings.fullscreenButton) {
     document.body.classList.add('fullscreen-enabled');
     fullscreenToggleElement.addEventListener('click', function() {
       screenfull.toggle();
@@ -141,31 +140,56 @@
     document.body.classList.add('fullscreen-disabled');
   }
 
-  // Set handler for scene list toggle.
-  sceneListToggleElement.addEventListener('click', toggleSceneList);
+  function initializeDropdown() {
+    if (!dropdownToggle || !dropdownSceneList) {
+      console.log('Dropdown elements not found');
+      return;
+    }
 
-  // Start with the scene list open on desktop.
-  if (!document.body.classList.contains('mobile')) {
-    showSceneList();
-    deleteLeftPositionDetailVr();
-  } else {
-    // On mobile, start with scene list hidden
-    hideSceneList();
-    showLeftPositionDetailVr();
-  }
-
-  // Set handler for scene switch.
-  scenes.forEach(function(scene) {
-    var el = document.querySelector('#sceneList .scene[data-id="' + scene.data.id + '"]');
-    el.addEventListener('click', function() {
-      switchScene(scene);
-      // On mobile, hide scene list after selecting a scene.
-      if (document.body.classList.contains('mobile')) {
-        hideSceneList();
-        showLeftPositionDetailVr();
+    // Toggle dropdown
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      var isOpen = dropdownSceneList.classList.contains('show');
+      
+      if (isOpen) {
+        dropdownSceneList.classList.remove('show');
+        dropdownToggle.classList.remove('open');
+      } else {
+        dropdownSceneList.classList.add('show');
+        dropdownToggle.classList.add('open');
       }
     });
-  });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      var container = document.getElementById('sceneDropdownContainer');
+      if (container && !container.contains(event.target)) {
+        dropdownSceneList.classList.remove('show');
+        dropdownToggle.classList.remove('open');
+      }
+    });
+
+    // Handle scene selection from dropdown
+    dropdownSceneElements.forEach(function(sceneEl) {
+      sceneEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var sceneId = this.getAttribute('data-id');
+        var targetScene = findSceneById(sceneId);
+        
+        if (targetScene) {
+          switchScene(targetScene);
+          
+          // Close dropdown after selection
+          dropdownSceneList.classList.remove('show');
+          dropdownToggle.classList.remove('open');
+        }
+      });
+    });
+  }
 
   // DOM elements for view controls.
   var viewUpElement = document.querySelector('#viewUp');
@@ -181,12 +205,12 @@
 
   // Associate view controls with elements.
   var controls = viewer.controls();
-  controls.registerMethod('upElement',    new Marzipano.ElementPressControlMethod(viewUpElement,     'y', -velocity, friction), true);
-  controls.registerMethod('downElement',  new Marzipano.ElementPressControlMethod(viewDownElement,   'y',  velocity, friction), true);
-  controls.registerMethod('leftElement',  new Marzipano.ElementPressControlMethod(viewLeftElement,   'x', -velocity, friction), true);
-  controls.registerMethod('rightElement', new Marzipano.ElementPressControlMethod(viewRightElement,  'x',  velocity, friction), true);
-  controls.registerMethod('inElement',    new Marzipano.ElementPressControlMethod(viewInElement,  'zoom', -velocity, friction), true);
-  controls.registerMethod('outElement',   new Marzipano.ElementPressControlMethod(viewOutElement, 'zoom',  velocity, friction), true);
+  if (viewUpElement) controls.registerMethod('upElement', new Marzipano.ElementPressControlMethod(viewUpElement, 'y', -velocity, friction), true);
+  if (viewDownElement) controls.registerMethod('downElement', new Marzipano.ElementPressControlMethod(viewDownElement, 'y', velocity, friction), true);
+  if (viewLeftElement) controls.registerMethod('leftElement', new Marzipano.ElementPressControlMethod(viewLeftElement, 'x', -velocity, friction), true);
+  if (viewRightElement) controls.registerMethod('rightElement', new Marzipano.ElementPressControlMethod(viewRightElement, 'x', velocity, friction), true);
+  if (viewInElement) controls.registerMethod('inElement', new Marzipano.ElementPressControlMethod(viewInElement, 'zoom', -velocity, friction), true);
+  if (viewOutElement) controls.registerMethod('outElement', new Marzipano.ElementPressControlMethod(viewOutElement, 'zoom', velocity, friction), true);
 
   function sanitize(s) {
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
@@ -199,6 +223,7 @@
     startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
+    updateDropdown(scene); // NEW: Update dropdown
   }
 
   function updateSceneName(scene) {
@@ -206,41 +231,28 @@
   }
 
   function updateSceneList(scene) {
-    for (var i = 0; i < sceneElements.length; i++) {
-      var el = sceneElements[i];
-      if (el.getAttribute('data-id') === scene.data.id) {
-        el.classList.add('current');
-      } else {
-        el.classList.remove('current');
-      }
+    // This function is kept for compatibility but dropdown handles the UI updates
+    console.log('Scene updated to:', scene.data.name);
+  }
+
+  // NEW: Update dropdown when scene changes
+  function updateDropdown(scene) {
+    if (!dropdownToggle || !scene || !scene.data) return;
+
+    // Update toggle text
+    var toggleText = dropdownToggle.querySelector('.text');
+    if (toggleText) {
+      toggleText.textContent = 'Pilih Lokasi - ' + scene.data.name;
     }
-  }
 
-  function showSceneList() {
-    sceneListElement.classList.add('enabled');
-    sceneListToggleElement.classList.add('enabled');
-    showLeftPositionDetailVr();
-  }
-  
-  function deleteLeftPositionDetailVr(){
-    sceneDetailVr.classList.add('enabled');
-  }
-  
-  function showLeftPositionDetailVr(){
-    sceneDetailVr.classList.remove('enabled');
-  }
-  
-  function hideSceneList() {
-    sceneListElement.classList.remove('enabled');
-    sceneListToggleElement.classList.remove('enabled');
-    deleteLeftPositionDetailVr()
-  }
+    // Update current scene in dropdown
+    dropdownSceneElements.forEach(function(sceneEl) {
+      sceneEl.classList.remove('current');
+    });
 
-  function toggleSceneList() {
-    if (sceneListElement.classList.contains('enabled')) {
-      // hideSceneList();
-    } else {
-      showSceneList();
+    var currentSceneElement = document.querySelector('#sceneList .scene[data-id="' + scene.data.id + '"]');
+    if (currentSceneElement) {
+      currentSceneElement.classList.add('current');
     }
   }
 
@@ -268,18 +280,14 @@
   }
 
   function createLinkHotspotElement(hotspot) {
-
-    // Create wrapper element to hold icon and tooltip.
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
 
-    // Create image element.
     var icon = document.createElement('img');
     icon.src = 'img/link.png';
     icon.classList.add('link-hotspot-icon');
 
-    // Set rotation transform.
     var transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];
     for (var i = 0; i < transformProperties.length; i++) {
       var property = transformProperties[i];
@@ -292,7 +300,6 @@
     });
 
     // Prevent touch and scroll events from reaching the parent element.
-    // This prevents the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
 
     // Create tooltip element.
@@ -308,7 +315,6 @@
   }
 
   function createInfoHotspotElement(hotspot) {
-
     // Create wrapper element to hold icon and tooltip.
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
@@ -334,18 +340,10 @@
     title.innerHTML = hotspot.title;
     titleWrapper.appendChild(title);
 
-    // Create close element.
-    var closeWrapper = document.createElement('div');
-    closeWrapper.classList.add('info-hotspot-close-wrapper');
-    var closeIcon = document.createElement('img');
-    closeIcon.src = 'img/close.png';
-    closeIcon.classList.add('info-hotspot-close-icon');
-    closeWrapper.appendChild(closeIcon);
 
     // Construct header element.
     header.appendChild(iconWrapper);
     header.appendChild(titleWrapper);
-    header.appendChild(closeWrapper);
 
     // Create text element.
     var text = document.createElement('div');
@@ -361,20 +359,8 @@
     modal.innerHTML = wrapper.innerHTML;
     modal.classList.add('info-hotspot-modal');
     document.body.appendChild(modal);
-
-    var toggle = function() {
-      wrapper.classList.toggle('visible');
-      modal.classList.toggle('visible');
-    };
-
-    // Show content when hotspot is clicked.
-    wrapper.querySelector('.info-hotspot-header').addEventListener('click', toggle);
-
-    // Hide content when close icon is clicked.
-    modal.querySelector('.info-hotspot-close-wrapper').addEventListener('click', toggle);
-
+    
     // Prevent touch and scroll events from reaching the parent element.
-    // This prevents the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
 
     return wrapper;
@@ -408,6 +394,9 @@
     }
     return null;
   }
+
+  // Initialize dropdown functionality
+  initializeDropdown();
 
   // Display the initial scene.
   switchScene(scenes[0]);
